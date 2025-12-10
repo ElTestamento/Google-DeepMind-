@@ -13,7 +13,6 @@ const App: React.FC = () => {
   const [state, setState] = useState<AppState>({
     patient: INITIAL_PATIENT,
     clinical: INITIAL_CLINICAL,
-    language: 'de',
     audience: 'doctor',
     useStandardCourse: false,
     doctorName: '',
@@ -87,26 +86,15 @@ const App: React.FC = () => {
           <section className="bg-blue-50 p-4 rounded-xl border border-blue-100">
             <h2 className="text-sm font-bold text-blue-800 uppercase tracking-wider mb-4">Configuration</h2>
             <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Language</label>
-                <select 
-                  className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow"
-                  value={state.language}
-                  onChange={(e) => setState(prev => ({ ...prev, language: e.target.value as any }))}
-                >
-                  <option value="de">German (Deutsch)</option>
-                  <option value="en">English</option>
-                </select>
-              </div>
-              <div>
+              <div className="col-span-2">
                 <label className="block text-xs font-medium text-gray-600 mb-1">Target Audience</label>
                 <select 
                   className="w-full bg-white border border-gray-300 rounded-md px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none transition-shadow"
                   value={state.audience}
                   onChange={(e) => setState(prev => ({ ...prev, audience: e.target.value as any }))}
                 >
-                  <option value="doctor">Medical Professional (Arztbrief)</option>
-                  <option value="patient">Patient (Laienverständlich)</option>
+                  <option value="doctor">Medical Professional (Formal)</option>
+                  <option value="patient">Patient (Plain English)</option>
                 </select>
               </div>
               
@@ -130,10 +118,10 @@ const App: React.FC = () => {
                     onChange={(e) => setState(prev => ({ ...prev, doctorPosition: e.target.value }))}
                   >
                     <option value="">Select Position...</option>
-                    <option value="Assistenzarzt">Assistenzarzt / Resident</option>
-                    <option value="Facharzt">Facharzt / Specialist</option>
-                    <option value="Oberarzt">Oberarzt / Senior Physician</option>
-                    <option value="Chefarzt">Chefarzt / Chief Physician</option>
+                    <option value="Resident">Resident (Assistenzarzt)</option>
+                    <option value="Specialist">Specialist (Facharzt)</option>
+                    <option value="Senior Physician">Senior Physician (Oberarzt)</option>
+                    <option value="Chief Physician">Chief Physician (Chefarzt)</option>
                   </select>
                 </div>
               </div>

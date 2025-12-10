@@ -33,15 +33,11 @@ export const generateDischargeLetter = async (
   const ai = new GoogleGenAI({ apiKey });
 
   // 1. Prepare the System Instruction
-  const targetLanguage = state.language === 'de' ? 'GERMAN (Deutsch)' : 'ENGLISH';
-  
   let systemInstruction = SYSTEM_INSTRUCTION
-    .replace('{{language}}', targetLanguage)
     .replace('{{audience}}', state.audience)
     .replace('{{dischargeDate}}', state.patient.dischargeDate || 'Date: _____________');
     
   // Global replace to ensure all instances are covered
-  systemInstruction = systemInstruction.split('{{language}}').join(targetLanguage);
   systemInstruction = systemInstruction.split('{{audience}}').join(state.audience);
   systemInstruction = systemInstruction.split('{{dischargeDate}}').join(state.patient.dischargeDate || 'Date: _____________');
 
@@ -64,7 +60,7 @@ export const generateDischargeLetter = async (
   
   if (state.useStandardCourse) {
     clinicalCourseText += `\n\n[INSTRUCTION]: The user requested a STANDARD CLINICAL COURSE (complications-free). 
-    - Write this section in **${targetLanguage}**.
+    - Write this section in **ENGLISH**.
     - Use **QUALITATIVE** descriptions (e.g. "pain was well controlled", "wound healing primary", "mobilization successful").
     - **DO NOT** invent specific numbers, dates, or lab values.
     - Fill in the narrative based on the Diagnosis and Operation provided.`;
@@ -76,16 +72,15 @@ export const generateDischargeLetter = async (
 PLEASE GENERATE A DISCHARGE LETTER BASED ON THE FOLLOWING INFORMATION.
 
 *** CRITICAL INSTRUCTIONS ***
-1. **LANGUAGE:** The output must be strictly in: **${targetLanguage}**.
-   - If input is German, TRANSLATE to ${targetLanguage}.
-   - If input is English, TRANSLATE to ${targetLanguage}.
+1. **LANGUAGE:** The output must be strictly in: **ENGLISH**.
+   - If input is German, TRANSLATE to ENGLISH.
 2. **AUDIENCE:** Target audience is: **${state.audience.toUpperCase()}**.
    - If PATIENT: Explain ALL technical terms in brackets.
 3. **DATA FIDELITY:** 
    - DO NOT INVENT NUMBERS. Use "General/Qualitative Formulations" if data is missing.
    - Example: "Lab values showed no significant abnormalities" instead of inventing "CRP 3.0".
 4. **SIGNATORY:**
-   - Translate the Doctor's Position to ${targetLanguage} (e.g. "Facharzt" -> "Specialist", "Oberarzt" -> "Senior Physician").
+   - Translate the Doctor's Position to ENGLISH (e.g. "Facharzt" -> "Specialist").
 
 ${validationInstruction}
 
@@ -98,7 +93,7 @@ DATA MERGING INSTRUCTIONS:
 
 --- SIGNATORY ---
 Doctor: ${state.doctorName || 'Not provided'}
-Position (Input): ${state.doctorPosition || ''} (Please translate this to ${targetLanguage})
+Position (Input): ${state.doctorPosition || ''} (Please translate this to ENGLISH)
 
 --- PATIENT DEMOGRAPHICS (Form Input) ---
 First Name: ${state.patient.firstName || '[Empty]'}

@@ -16,13 +16,11 @@ export interface ClinicalData {
   recommendations: string;
 }
 
-export type Language = 'de' | 'en';
 export type Audience = 'doctor' | 'patient';
 
 export interface AppState {
   patient: PatientData;
   clinical: ClinicalData;
-  language: Language;
   audience: Audience;
   useStandardCourse: boolean;
   doctorName: string;
