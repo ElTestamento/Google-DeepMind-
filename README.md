@@ -22,10 +22,10 @@ View your app in AI Studio: https://ai.studio/apps/drive/1byoIYDld6C_XOCOJCQAmuo
 
 **Dummy_Patient_Data:**
 
-laboratory.pdf
-medication_at_home.pdf
-microbiology.pdf
-old_report.docx
-post.png
-pre.png
+laboratory.pdf/ 
+medication_at_home.pdf/
+microbiology.pdf/
+old_report.docx/
+post.png/
+pre.png/
 surgery_rep.doc
