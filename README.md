@@ -18,3 +18,14 @@ View your app in AI Studio: https://ai.studio/apps/drive/1byoIYDld6C_XOCOJCQAmuo
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+
+**Dummy_Patient_Data:**
+
+laboratory.pdf
+medication_at_home.pdf
+microbiology.pdf
+old_report.docx
+post.png
+pre.png
+surgery_rep.doc
